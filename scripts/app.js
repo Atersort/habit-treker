@@ -3,7 +3,12 @@
 let habits = [];
 const HABIT_KEY = "HABBIT_KEY"
 const page = {
-    menu: document.querySelector(".menu__list")
+    menu: document.querySelector(".menu__list"),
+    header: {
+        h1: document.querySelector("h1"),
+        progressPercent: document.querySelector(".progress__text_percent"),
+        progressBar: document.querySelector(".progress__cover-bar")
+    }
 }
 
 /* utils    эта тема обращается к локал сторедж */
@@ -51,9 +56,23 @@ function renderMenu(activeHabits) {
     }
 }
 
+function renderHead(activeHabit) {
+    if(!activeHabit) {
+        return
+    }
+    page.header.h1.innerHTML = activeHabit.name;
+
+    let progressPercent = activeHabit.days.length / activeHabit.target * 100;
+    progressPercent = progressPercent > 100 ? 100 : progressPercent.toFixed(0);
+    page.header.progressPercent.innerHTML = progressPercent + " %";
+
+    page.header.progressBar.setAttribute("style", `width: ${progressPercent}%`)
+}
+
 function render(actionHabitsId) {
     const idMenuActive = habits.find(habit => habit.id === actionHabitsId);
     renderMenu(idMenuActive);
+    renderHead(idMenuActive)
 }
 
 // init
