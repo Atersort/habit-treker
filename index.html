@@ -37,23 +37,15 @@
         </header>
         <main>
             <div class="wrapper">
-                <div class="habbit">
-                    <div class="habbit-day">
-                        День 1
-                    </div>
-                    <div class="habbit-commit">
-                        Первый подход всегда даётся тяжело
-                    </div>
-                    <button class="habbit-delete">
-                        <img src="./images/delete.svg" alt="">
-                    </button>
+                <div id="days">
+
                 </div>
                 <div class="habbit">
                     <div class="habbit-day">
-                        День 2
+                        День _
                     </div>
-                    <form class="habbit-form">
-                        <input class="input_icon" type="text" placeholder="Комментарий">
+                    <form  class="habbit-form" onsubmit="addDays(event)">
+                        <input name="commit" class="input_icon" type="text" placeholder="Комментарий">
                         <img class="input__icon" src="./images/commit.svg">
                         <button class="btn">Готово</button>
                     </form>

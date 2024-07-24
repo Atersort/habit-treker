@@ -8,6 +8,10 @@ const page = {
         h1: document.querySelector("h1"),
         progressPercent: document.querySelector(".progress__text_percent"),
         progressBar: document.querySelector(".progress__cover-bar")
+    },
+    content: {
+        day: document.getElementById("days"),
+        nextDay: document.querySelector(".habbit-day")
     }
 }
 
@@ -16,7 +20,6 @@ const page = {
 function loadData() {
     const habitStorage = window.localStorage.getItem(HABIT_KEY);
     const habitArray = JSON.parse(habitStorage);
-    console.log(typeof habitArray);
     if (Array(habitArray)) {
         habits = habitArray
     }
@@ -29,10 +32,6 @@ function getData() {
 // render
 
 function renderMenu(activeHabits) {
-    // проверка если в функцию передастя ноль
-    if (!activeHabits) {
-        return
-    }
     for (const habit of habits) {
         const pointMenu = document.querySelector(`[menu-habit-id="${habit.id}"]`);
         if (!pointMenu) {
@@ -57,9 +56,6 @@ function renderMenu(activeHabits) {
 }
 
 function renderHead(activeHabit) {
-    if(!activeHabit) {
-        return
-    }
     page.header.h1.innerHTML = activeHabit.name;
 
     let progressPercent = activeHabit.days.length / activeHabit.target * 100;
@@ -69,10 +65,41 @@ function renderHead(activeHabit) {
     page.header.progressBar.setAttribute("style", `width: ${progressPercent}%`)
 }
 
+function renderContent(activeHabit) {
+    page.content.day.innerHTML = ""
+    for (const index in activeHabit.days) {
+        const element = document.createElement("div");
+        element.classList.add("habbit");
+        element.innerHTML = `
+                        <div class="habbit-day">
+                            День ${Number(index) + 1}
+                        </div>
+                        <div class="habbit-commit">
+                            ${activeHabit.days[index].commit}
+                        </div>
+                        <button class="habbit-delete">
+                            <img src="./images/delete.svg" alt="">
+                        </button>`;
+        page.content.day.appendChild(element);
+    }
+    page.content.nextDay.innerHTML = `День ${activeHabit.days.length + 1}`
+}
+
 function render(actionHabitsId) {
     const idMenuActive = habits.find(habit => habit.id === actionHabitsId);
+    if (!idMenuActive) {
+        return
+    }
     renderMenu(idMenuActive);
-    renderHead(idMenuActive)
+    renderHead(idMenuActive);
+    renderContent(idMenuActive);
+}
+
+// work days form
+function addDays(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    console.log(data.get("commit"));
 }
 
 // init
