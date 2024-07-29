@@ -2,6 +2,7 @@
 
 let habits = [];
 const HABIT_KEY = "HABBIT_KEY"
+let globalHabitId
 const page = {
     menu: document.querySelector(".menu__list"),
     header: {
@@ -86,6 +87,7 @@ function renderContent(activeHabit) {
 }
 
 function render(actionHabitsId) {
+    globalHabitId = actionHabitsId
     const idMenuActive = habits.find(habit => habit.id === actionHabitsId);
     if (!idMenuActive) {
         return
@@ -97,9 +99,26 @@ function render(actionHabitsId) {
 
 // work days form
 function addDays(event) {
+    const form = event.target;
     event.preventDefault();
     const data = new FormData(event.target);
-    console.log(data.get("commit"));
+    const commit = data.get("commit");
+    form['commit'].classList.remove('error')
+    if (!commit) {
+        form['commit'].classList.add('error')
+    }
+    habits = habits.map(habit => {
+        if (habit.id === globalHabitId){
+            return {
+                ...habit,
+                days: habit.days.concat([{commit}])
+            }
+        }
+        return habit
+    });
+    form['commit'].value = ''
+    render(globalHabitId)
+    saveData();
 }
 
 // init

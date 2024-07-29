@@ -201,6 +201,10 @@ input::placeholder {
     color: #8899a8;
 }
 
+input.error {
+    border: 1px solid red;
+}
+
 .habbit-form {
     font-size: 16px;
     line-height: 16px;
