@@ -243,3 +243,62 @@ input.error {
 .btn:hover {
     background-color: #dcdaff;
 }
+
+/*Попап окно*/
+.cover {
+    position:fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover_hidden {
+    /*display: none;*/
+}
+
+.popup {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 8px 14px 12px rgba(56, 56, 56, 0.05);
+}
+
+.btn-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+.popup__h2 {
+    font-weight: 400;
+    line-height: 27px;
+    font-size: 24px;
+    margin: 0;
+}
+
+.icon__label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #768396;
+    margin: 19px 0 10px 0;
+}
+
+.icon__select {
+    display: flex;
+    gap: 36px;
+    margin-bottom: 18px;
+}
+

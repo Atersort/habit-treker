@@ -78,7 +78,7 @@ function renderContent(activeHabit) {
                         <div class="habbit-commit">
                             ${activeHabit.days[index].commit}
                         </div>
-                        <button class="habbit-delete">
+                        <button class="habbit-delete" onclick="deleteHabit(${index})">
                             <img src="./images/delete.svg" alt="">
                         </button>`;
         page.content.day.appendChild(element);
@@ -108,7 +108,7 @@ function addDays(event) {
         form['commit'].classList.add('error')
     }
     habits = habits.map(habit => {
-        if (habit.id === globalHabitId){
+        if (habit.id === globalHabitId) {
             return {
                 ...habit,
                 days: habit.days.concat([{commit}])
@@ -117,8 +117,22 @@ function addDays(event) {
         return habit
     });
     form['commit'].value = ''
-    render(globalHabitId)
-    saveData();
+    render(globalHabitId);
+}
+
+function deleteHabit(habitId) {
+    habits = habits.map(habit => {
+        if (habit.id === globalHabitId) {
+            habit.days.splice(habitId, 1);
+            return {
+                ...habit,
+                days: habit.days
+            };
+        }
+        return habits
+    });
+    render(globalHabitId);
+    getData()
 }
 
 // init
