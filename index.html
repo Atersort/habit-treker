@@ -16,7 +16,7 @@
             <div class="menu__list">
 
             </div>
-            <button class="menu__add">
+            <button class="menu__add" onclick="togglePopup()">
                 <img src="./images/add__btn.svg" alt="Кнопка добавления задачи">
             </button>
 
@@ -53,22 +53,23 @@
             </div>
         </main>
     </div>
-    <div class="cover cover_hidden">
+    <div class="cover cover_hidden" id="add-habit-popup">
         <div class="popup">
             <h2 class="popup__h2">Новая привычка</h2>
             <div class="icon__label">Иконка</div>
             <div class="icon__select">
-                <button class="icon__select_item icon__select_item-active"><img src="./images/Sport.svg" alt=""></button>
-                <button class="icon__select_item"><img src="./images/Food.svg" alt=""></button>
-                <button class="icon__select_item"><img src="./images/Water.svg" alt=""></button>
+                <button class="icon__select_item icon__select_item-active" onclick="setIcon(this, 'sport')"><img src="./images/Sport.svg" alt=""></button>
+                <button class="icon__select_item" onclick="setIcon(this,'food')"><img src="./images/Food.svg" alt=""></button>
+                <button class="icon__select_item" onclick="setIcon(this,'water')"><img src="./images/Water.svg" alt=""></button>
 
             </div>
             <form class="popup-form" action="submit">
-                <input class="" type="text" placeholder="Название">
-                <input class="" type="number" placeholder="Цель">
+                <input class="" type="text" name="name" placeholder="Название">
+                <input class="" type="text" name="icon" hidden placeholder="Иконка">
+                <input class="" type="number" name="target" placeholder="Цель">
                 <button class="btn" name="" type="submit">Добавить</button>
             </form>
-            <button class="btn-close" name="" type="submit"><img src="./images/close.svg"></button>
+            <button class="btn-close" onclick="togglePopup()"><img src="./images/close.svg"></button>
         </div>
     </div>
 </div>

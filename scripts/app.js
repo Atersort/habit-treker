@@ -13,6 +13,10 @@ const page = {
     content: {
         day: document.getElementById("days"),
         nextDay: document.querySelector(".habbit-day")
+    },
+    popup: {
+        index: document.getElementById("add-habit-popup"),
+        iconField: document.querySelector('.popup-form input[name="icon"]')
     }
 }
 
@@ -29,6 +33,17 @@ function loadData() {
 function getData() {
     localStorage.setItem(HABIT_KEY, JSON.stringify(habits))
 }
+
+function togglePopup() {
+    if(page.popup.index.classList.contains('cover_hidden')) {
+        page.popup.index.classList.remove('cover_hidden')
+    } else {
+        page.popup.index.classList.add('cover_hidden');
+    }
+
+}
+
+// end utils
 
 // render
 
@@ -133,6 +148,14 @@ function deleteHabit(habitId) {
     });
     render(globalHabitId);
     getData()
+}
+
+// работа с привычками
+function setIcon(context, icon) {
+    page.popup.iconField.value = icon;
+    const activeIcon = document.querySelector('.icon__select_item.icon__select_item-active');
+    activeIcon.classList.remove('icon__select_item-active');
+    context.classList.add('icon__select_item-active');
 }
 
 // init
